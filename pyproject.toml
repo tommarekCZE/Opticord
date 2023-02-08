@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "opticord"
+version = "0.0.1"
+description = "An optimized Discord API wrapper for Python"
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
