@@ -7,5 +7,3 @@ load_dotenv()
 token = os.getenv('discordtkn')
 
 client = client.authenticate(token=token)
-
-print(client)

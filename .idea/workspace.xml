@@ -7,6 +7,7 @@
     <list default="true" id="23231c3c-2a59-4087-b200-de888a7fb00b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/opticord/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/opticord/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/client-test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/client-test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,5 +75,16 @@
       <updated>1676481559152</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

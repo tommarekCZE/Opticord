@@ -39,13 +39,8 @@ class authenticate:
     def __init__(self, token):
         self.token = token
         print("Opticord | Authenticating to the discord gateway")
-
-    def __str__(self):
         loop = asyncio.get_event_loop()
-        data = loop.run_until_complete(self._authenticate(token=self.token))
-        data['token'] = self.token
-        return str(data)
-
+        client = loop.run_until_complete(self._authenticate(token=self.token))
     async def _authenticate(self, token):
         uri = 'wss://gateway.discord.gg/?v=9&encoding=json'
         headers = {
@@ -78,11 +73,3 @@ class authenticate:
                     # Handle the READY event here
                 else:
                     print("Opticord | Received unknown event:", data)
-
-    async def _start_heartbeat(self, websocket, interval):
-        while True:
-            await asyncio.sleep(interval / 1000)
-            await websocket.send(json.dumps({
-                'op': 1,
-                'd': None
-            }))
