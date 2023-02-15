@@ -1,3 +1,4 @@
+"""""""""
 import aiosonic
 import asyncio
 import json
@@ -28,3 +29,60 @@ class authenticate:
             return await response.json()
         else:
             raise Exception(f"Unknown error during authentication\nStatus code: {response.status_code}")
+"""""""""
+
+import asyncio
+import json
+import websockets
+
+class authenticate:
+    def __init__(self, token):
+        self.token = token
+        print("Opticord | Authenticating to the discord gateway")
+
+    def __str__(self):
+        loop = asyncio.get_event_loop()
+        data = loop.run_until_complete(self._authenticate(token=self.token))
+        data['token'] = self.token
+        return str(data)
+
+    async def _authenticate(self, token):
+        uri = 'wss://gateway.discord.gg/?v=9&encoding=json'
+        headers = {
+            'Authorization': f'Bot {token}'
+        }
+
+        async with websockets.connect(uri, extra_headers=headers) as websocket:
+            message = {
+                'op': 2,
+                'd': {
+                    'token': token,
+                    'intents': 513,
+                    'properties': {
+                        '$os': 'linux',
+                        '$browser': 'my_library',
+                        '$device': 'my_library'
+                    }
+                }
+            }
+            await websocket.send(json.dumps(message))
+
+            while True:
+                response = await websocket.recv()
+                data = json.loads(response)
+
+                if data['op'] == 10:
+                    print("Opticord | Successfully Authenticated to discord gateway")
+                elif data['op'] == 0 and data['t'] == 'READY':
+                    print("Opticord | Received READY event:", data['d'])
+                    # Handle the READY event here
+                else:
+                    print("Opticord | Received unknown event:", data)
+
+    async def _start_heartbeat(self, websocket, interval):
+        while True:
+            await asyncio.sleep(interval / 1000)
+            await websocket.send(json.dumps({
+                'op': 1,
+                'd': None
+            }))
